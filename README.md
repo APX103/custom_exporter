@@ -25,14 +25,11 @@ nohup ./deploy_platform_exporter 2>&1 >/dev/null&
 1. Create a file in [repo_path]/metrics/
 2. Create a struct ending with "Metric"
 3. Implement "Update() error" function for the struct
-4. Register the struct in "main.go" file like this.
+4. Register the struct in the same file in `func init()` like this.
 
 ``` go
-func UpdateMetrics() {
-	var ms []metrics.Metrics
-	ms = append(ms, &metrics.CPUMitrics{})
-    // Like this ↑, "CPUMitrics" is THE struct
-	...
+func init() {
+	registerCollector("cpu_metrics", defaultEnabled, &CPUMitrics{})
 }
 ```
 
