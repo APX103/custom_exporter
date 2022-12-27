@@ -33,6 +33,8 @@ func init() {
 }
 ```
 
+> JUST LIKE `[repo_path]/metrics/demo.go`
+
 ### Input Parameters Extend Steps
 
 1. import this => `kingpin "gopkg.in/alecthomas/kingpin.v2"`
