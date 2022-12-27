@@ -25,6 +25,10 @@ var (
 
 type CPUMitrics struct{}
 
+func init() {
+	registerCollector("cpu_metrics", defaultEnabled, &CPUMitrics{})
+}
+
 func getCPUUtilizationMetric() (float64, error) {
 	percent, err := cpu.Percent(time.Second, false)
 	if err != nil {

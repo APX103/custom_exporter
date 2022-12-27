@@ -23,11 +23,14 @@ func UpdateMetrics() {
 	var ms []metrics.Metrics
 	ms = append(ms, &metrics.CPUMitrics{})
 	ms = append(ms, &metrics.PCIMitrics{})
-	for _, m := range ms {
-		err := m.Update()
-		if err != nil {
-			fmt.Printf("Get Param Err: %v \n", err)
+	for key, m := range metrics.MetricsState {
+		if *m {
+			err := metrics.InitiatedMetrics[key].Update()
+			if err != nil {
+				fmt.Printf("Get Param Err: %v \n", err)
+			}
 		}
+
 	}
 }
 

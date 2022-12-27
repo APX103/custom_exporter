@@ -50,6 +50,10 @@ func getPCIListMetric() (float64, error) {
 
 type PCIMitrics struct{}
 
+func init() {
+	registerCollector("pci_metrics", defaultEnabled, &PCIMitrics{})
+}
+
 func (m *PCIMitrics) Update() error {
 	lp, err := getPCIListMetric()
 	if err != nil {
