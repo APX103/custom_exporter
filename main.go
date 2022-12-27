@@ -20,9 +20,6 @@ import (
 )
 
 func UpdateMetrics() {
-	var ms []metrics.Metrics
-	ms = append(ms, &metrics.CPUMitrics{})
-	ms = append(ms, &metrics.PCIMitrics{})
 	for key, m := range metrics.MetricsState {
 		if *m {
 			err := metrics.InitiatedMetrics[key].Update()
