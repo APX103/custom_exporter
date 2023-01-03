@@ -12,13 +12,13 @@ var (
 	})
 )
 
-type DemoMitrics struct{}
+type DemoMetrics struct{}
 
 func init() {
-	registerCollector("demo_metrics", defaultEnabled, &DemoMitrics{})
+	registerCollector("demo_metrics", defaultEnabled, &DemoMetrics{})
 }
 
-func (m *DemoMitrics) Update() error {
+func (m *DemoMetrics) Update() error {
 	demoNum.Set(1)
 	return nil
 }

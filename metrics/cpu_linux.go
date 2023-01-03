@@ -21,6 +21,11 @@ var (
 		Name: "cpu_core_number",
 		Help: "CPU Core Number of this PC",
 	})
+	cpuType = promauto.NewGauge(prometheus.GaugeOpts{
+		Name: "cpu_type",
+		Help: "CPU Type of this PC",
+	})
+	cpuFrequency = make([]prometheus.Gauge, 0)
 )
 
 type CPUMitrics struct{}
@@ -62,6 +67,8 @@ func getCPUCoreNumMetric() (float64, error) {
 		fmt.Println("Atoi error in getCPUCoreNumMetric")
 		return 0, err
 	}
+
+	// now cn is number of cpu, int
 	return float64(cn), nil
 }
 
