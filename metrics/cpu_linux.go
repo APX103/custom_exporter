@@ -21,11 +21,6 @@ var (
 		Name: "cpu_core_number",
 		Help: "CPU Core Number of this PC",
 	})
-	cpuType = promauto.NewGauge(prometheus.GaugeOpts{
-		Name: "cpu_type",
-		Help: "CPU Type of this PC",
-	})
-	cpuFrequency = make([]prometheus.Gauge, 0)
 )
 
 type CPUMitrics struct{}
