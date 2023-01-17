@@ -46,3 +46,8 @@ procPath = kingpin.Flag("path.procfs", "procfs mountpoint.")
                   .Default(procfs.DefaultMountPoint)
                   .String()
 ```
+
+# TODO
+
+1. Add unit test
+2. Add compile options
