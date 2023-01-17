@@ -111,7 +111,7 @@ func (iods *IODeviceMetrics) Update() error {
 	}
 	iods.updateIODeviceMetric(iostats)
 	for _, s := range iods.IODeviceStats {
-		device.WithLabelValues(s.device).Inc()
+		device.WithLabelValues(s.device).Add(0)
 		tps.WithLabelValues(s.device).Set(s.tps)
 		kB_read_per_second.WithLabelValues(s.device).Set(s.kB_read_per_second)
 		kB_wrtn_per_second.WithLabelValues(s.device).Set(s.kB_wrtn_per_second)
