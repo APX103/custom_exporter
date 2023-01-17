@@ -23,10 +23,10 @@ var (
 	})
 )
 
-type CPUMitrics struct{}
+type CPUMetrics struct{}
 
 func init() {
-	registerCollector("cpu_metrics", defaultEnabled, &CPUMitrics{})
+	registerCollector("cpu_metrics", defaultEnabled, &CPUMetrics{})
 }
 
 func getCPUUtilizationMetric() (float64, error) {
@@ -67,7 +67,7 @@ func getCPUCoreNumMetric() (float64, error) {
 	return float64(cn), nil
 }
 
-func (m *CPUMitrics) Update() error {
+func (m *CPUMetrics) Update() error {
 	cu, err := getCPUUtilizationMetric()
 	cn, err := getCPUCoreNumMetric()
 	if err != nil {

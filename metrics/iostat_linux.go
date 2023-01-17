@@ -71,9 +71,7 @@ func (d *IODeviceMetrics) updateIODeviceMetric(newIOStats []deviceStats) {
 
 	}
 
-	for i, stats := range newIOStats {
-		d.IODeviceStats[i] = stats
-	}
+	copy(d.IODeviceStats, newIOStats)
 }
 
 func getIOStats() ([]deviceStats, error) {
