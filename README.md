@@ -50,3 +50,4 @@ procPath = kingpin.Flag("path.procfs", "procfs mountpoint.")
 # TODO
 
 1. Add unit test
+2. Add compile options
