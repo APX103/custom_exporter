@@ -1,3 +1,6 @@
+//go:build !nopci
+// +build !nopci
+
 package metrics
 
 // [jetson-exporter] lspci

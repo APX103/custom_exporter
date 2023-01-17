@@ -62,6 +62,8 @@ func getCPUCoreNumMetric() (float64, error) {
 		fmt.Println("Atoi error in getCPUCoreNumMetric")
 		return 0, err
 	}
+
+	// now cn is number of cpu, int
 	return float64(cn), nil
 }
 
