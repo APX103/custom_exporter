@@ -3,6 +3,18 @@
 
 package metrics
 
+// Linux 4.9.253-tegra (apx103-desktop)    2023年01月17日  _aarch64_       (4 CPU)
+
+// Device             tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+// loop0             0.00         0.00         0.00        983         25
+// loop1             0.00         0.00         0.00          1          0
+// mtdblock0         0.00         0.00         0.00         80          0
+// mmcblk0           0.22         4.02        18.15    1698041    7671496
+// zram0             0.01         0.00         0.02       1744       8904
+// zram1             0.01         0.00         0.02       1704       8900
+// zram2             0.01         0.00         0.02       1800       8900
+// zram3             0.01         0.00         0.02       1744       8900
+
 import (
 	"bufio"
 	"fmt"
@@ -54,7 +66,6 @@ func (d *IODeviceMetrics) updateIODeviceMetric(newIOStats []deviceStats) {
 	d.IODeviceStatsMutex.Lock()
 	defer d.IODeviceStatsMutex.Unlock()
 
-	// Reset the cache if the list of CPUs has changed.
 	if len(d.IODeviceStats) != len(newIOStats) {
 		d.IODeviceStats = make([]deviceStats, len(newIOStats))
 

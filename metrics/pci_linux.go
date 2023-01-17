@@ -49,7 +49,6 @@ func getPCIListMetric() ([]string, error) {
 		if err != nil {
 			break
 		}
-		// fmt.Printf(string(output) + "\n")
 		pci_list = append(pci_list, string(output))
 	}
 	cmd.Wait()
@@ -65,6 +64,7 @@ type PCIMitrics struct {
 func (p *PCIMitrics) updatePCIMitrics(pci_list []string) {
 	p.PCIDeviceStatsMutex.Lock()
 	defer p.PCIDeviceStatsMutex.Unlock()
+
 	if len(p.PCIDevicelist) != len(pci_list) {
 		p.PCIDevicelist = make([]string, len(pci_list))
 
