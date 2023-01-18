@@ -82,10 +82,6 @@ func main() {
 	log.SetOutput(os.Stdout)
 	log.SetLevel(parseLogLevel(*logLevel))
 
-	log.Infof("server start info")
-	log.Errorf("server start error")
-	log.Debugf("server start debug")
-
 	recordMetrics()
 
 	logger := promlog.New(promlogConfig)

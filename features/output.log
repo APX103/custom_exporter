@@ -1,0 +1,226 @@
+cpu_utilization 0.7499999949213816
+# HELP demo_number DEMO NUmber
+# TYPE demo_number gauge
+demo_number 1
+# HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.
+# TYPE go_gc_duration_seconds summary
+go_gc_duration_seconds{quantile="0"} 5.0731e-05
+go_gc_duration_seconds{quantile="0.25"} 8.1669e-05
+go_gc_duration_seconds{quantile="0.5"} 9.5627e-05
+go_gc_duration_seconds{quantile="0.75"} 0.000113544
+go_gc_duration_seconds{quantile="1"} 0.000122451
+go_gc_duration_seconds_sum 0.000863303
+go_gc_duration_seconds_count 9
+# HELP go_goroutines Number of goroutines that currently exist.
+# TYPE go_goroutines gauge
+go_goroutines 10
+# HELP go_info Information about the Go environment.
+# TYPE go_info gauge
+go_info{version="go1.19.3"} 1
+# HELP go_memstats_alloc_bytes Number of bytes allocated and still in use.
+# TYPE go_memstats_alloc_bytes gauge
+go_memstats_alloc_bytes 2.419696e+06
+# HELP go_memstats_alloc_bytes_total Total number of bytes allocated, even if freed.
+# TYPE go_memstats_alloc_bytes_total counter
+go_memstats_alloc_bytes_total 2.6632944e+07
+# HELP go_memstats_buck_hash_sys_bytes Number of bytes used by the profiling bucket hash table.
+# TYPE go_memstats_buck_hash_sys_bytes gauge
+go_memstats_buck_hash_sys_bytes 4613
+# HELP go_memstats_frees_total Total number of frees.
+# TYPE go_memstats_frees_total counter
+go_memstats_frees_total 130112
+# HELP go_memstats_gc_sys_bytes Number of bytes used for garbage collection system metadata.
+# TYPE go_memstats_gc_sys_bytes gauge
+go_memstats_gc_sys_bytes 5.090144e+06
+# HELP go_memstats_heap_alloc_bytes Number of heap bytes allocated and still in use.
+# TYPE go_memstats_heap_alloc_bytes gauge
+go_memstats_heap_alloc_bytes 2.419696e+06
+# HELP go_memstats_heap_idle_bytes Number of heap bytes waiting to be used.
+# TYPE go_memstats_heap_idle_bytes gauge
+go_memstats_heap_idle_bytes 4.481024e+06
+# HELP go_memstats_heap_inuse_bytes Number of heap bytes that are in use.
+# TYPE go_memstats_heap_inuse_bytes gauge
+go_memstats_heap_inuse_bytes 3.514368e+06
+# HELP go_memstats_heap_objects Number of allocated objects.
+# TYPE go_memstats_heap_objects gauge
+go_memstats_heap_objects 10907
+# HELP go_memstats_heap_released_bytes Number of heap bytes released to OS.
+# TYPE go_memstats_heap_released_bytes gauge
+go_memstats_heap_released_bytes 3.145728e+06
+# HELP go_memstats_heap_sys_bytes Number of heap bytes obtained from system.
+# TYPE go_memstats_heap_sys_bytes gauge
+go_memstats_heap_sys_bytes 7.995392e+06
+# HELP go_memstats_last_gc_time_seconds Number of seconds since 1970 of last garbage collection.
+# TYPE go_memstats_last_gc_time_seconds gauge
+go_memstats_last_gc_time_seconds 1.6740247292256646e+09
+# HELP go_memstats_lookups_total Total number of pointer lookups.
+# TYPE go_memstats_lookups_total counter
+go_memstats_lookups_total 0
+# HELP go_memstats_mallocs_total Total number of mallocs.
+# TYPE go_memstats_mallocs_total counter
+go_memstats_mallocs_total 141019
+# HELP go_memstats_mcache_inuse_bytes Number of bytes in use by mcache structures.
+# TYPE go_memstats_mcache_inuse_bytes gauge
+go_memstats_mcache_inuse_bytes 1200
+# HELP go_memstats_mcache_sys_bytes Number of bytes used for mcache structures obtained from system.
+# TYPE go_memstats_mcache_sys_bytes gauge
+go_memstats_mcache_sys_bytes 15600
+# HELP go_memstats_mspan_inuse_bytes Number of bytes in use by mspan structures.
+# TYPE go_memstats_mspan_inuse_bytes gauge
+go_memstats_mspan_inuse_bytes 43248
+# HELP go_memstats_mspan_sys_bytes Number of bytes used for mspan structures obtained from system.
+# TYPE go_memstats_mspan_sys_bytes gauge
+go_memstats_mspan_sys_bytes 81600
+# HELP go_memstats_next_gc_bytes Number of heap bytes when next garbage collection will take place.
+# TYPE go_memstats_next_gc_bytes gauge
+go_memstats_next_gc_bytes 4.194304e+06
+# HELP go_memstats_other_sys_bytes Number of bytes used for other system allocations.
+# TYPE go_memstats_other_sys_bytes gauge
+go_memstats_other_sys_bytes 1.065723e+06
+# HELP go_memstats_stack_inuse_bytes Number of bytes in use by the stack allocator.
+# TYPE go_memstats_stack_inuse_bytes gauge
+go_memstats_stack_inuse_bytes 393216
+# HELP go_memstats_stack_sys_bytes Number of bytes obtained from system for stack allocator.
+# TYPE go_memstats_stack_sys_bytes gauge
+go_memstats_stack_sys_bytes 393216
+# HELP go_memstats_sys_bytes Number of bytes obtained from system.
+# TYPE go_memstats_sys_bytes gauge
+go_memstats_sys_bytes 1.4646288e+07
+# HELP go_threads Number of OS threads created.
+# TYPE go_threads gauge
+go_threads 7
+# HELP iostat_device iostat_device
+# TYPE iostat_device counter
+iostat_device{device=""} 0
+iostat_device{device="loop0"} 0
+iostat_device{device="loop1"} 0
+iostat_device{device="mmcblk0"} 0
+iostat_device{device="mtdblock0"} 0
+iostat_device{device="zram0"} 0
+iostat_device{device="zram1"} 0
+iostat_device{device="zram2"} 0
+iostat_device{device="zram3"} 0
+# HELP iostat_kB_read iostat_kB_read
+# TYPE iostat_kB_read gauge
+iostat_kB_read{device=""} 0
+iostat_kB_read{device="loop0"} 983
+iostat_kB_read{device="loop1"} 1
+iostat_kB_read{device="mmcblk0"} 2.906793e+06
+iostat_kB_read{device="mtdblock0"} 80
+iostat_kB_read{device="zram0"} 2168
+iostat_kB_read{device="zram1"} 2228
+iostat_kB_read{device="zram2"} 2288
+iostat_kB_read{device="zram3"} 2232
+# HELP iostat_kB_read_per_second iostat_kB_read_per_second
+# TYPE iostat_kB_read_per_second gauge
+iostat_kB_read_per_second{device=""} 0
+iostat_kB_read_per_second{device="loop0"} 0
+iostat_kB_read_per_second{device="loop1"} 0
+iostat_kB_read_per_second{device="mmcblk0"} 5.7
+iostat_kB_read_per_second{device="mtdblock0"} 0
+iostat_kB_read_per_second{device="zram0"} 0
+iostat_kB_read_per_second{device="zram1"} 0
+iostat_kB_read_per_second{device="zram2"} 0
+iostat_kB_read_per_second{device="zram3"} 0
+# HELP iostat_kB_wrtn iostat_kB_wrtn
+# TYPE iostat_kB_wrtn gauge
+iostat_kB_wrtn{device=""} 0
+iostat_kB_wrtn{device="loop0"} 25
+iostat_kB_wrtn{device="loop1"} 0
+iostat_kB_wrtn{device="mmcblk0"} 8.289848e+06
+iostat_kB_wrtn{device="mtdblock0"} 0
+iostat_kB_wrtn{device="zram0"} 27244
+iostat_kB_wrtn{device="zram1"} 27240
+iostat_kB_wrtn{device="zram2"} 27236
+iostat_kB_wrtn{device="zram3"} 27244
+# HELP iostat_kB_wrtn_per_second iostat_kB_wrtn_per_second
+# TYPE iostat_kB_wrtn_per_second gauge
+iostat_kB_wrtn_per_second{device=""} 0
+iostat_kB_wrtn_per_second{device="loop0"} 0
+iostat_kB_wrtn_per_second{device="loop1"} 0
+iostat_kB_wrtn_per_second{device="mmcblk0"} 16.27
+iostat_kB_wrtn_per_second{device="mtdblock0"} 0
+iostat_kB_wrtn_per_second{device="zram0"} 0.05
+iostat_kB_wrtn_per_second{device="zram1"} 0.05
+iostat_kB_wrtn_per_second{device="zram2"} 0.05
+iostat_kB_wrtn_per_second{device="zram3"} 0.05
+# HELP iostat_tps iostat_tps
+# TYPE iostat_tps gauge
+iostat_tps{device=""} 0
+iostat_tps{device="loop0"} 0
+iostat_tps{device="loop1"} 0
+iostat_tps{device="mmcblk0"} 0.35
+iostat_tps{device="mtdblock0"} 0
+iostat_tps{device="zram0"} 0.01
+iostat_tps{device="zram1"} 0.01
+iostat_tps{device="zram2"} 0.01
+iostat_tps{device="zram3"} 0.01
+# HELP mem_total Mem Total of this PC
+# TYPE mem_total gauge
+mem_total 2.02746e+06
+# HELP mem_utilization Mem utilization of this PC
+# TYPE mem_utilization gauge
+mem_utilization 54.08205340672566
+# HELP net_dev net_dev, and it's ipv4 addr
+# TYPE net_dev counter
+net_dev{ipv4_addr="",net_dev="dummy0"} 0
+net_dev{ipv4_addr="",net_dev="eth0"} 0
+net_dev{ipv4_addr="",net_dev="l4tbr0"} 0
+net_dev{ipv4_addr="",net_dev="rndis0"} 0
+net_dev{ipv4_addr="",net_dev="usb0"} 0
+net_dev{ipv4_addr="10.1.83.108",net_dev="wlan0"} 0
+net_dev{ipv4_addr="172.17.0.1",net_dev="docker0"} 0
+# HELP pci_list_item List of the pci device
+# TYPE pci_list_item counter
+pci_list_item{device="00:02.0 PCI bridge: NVIDIA Corporation Device 0faf (rev a1)"} 0
+pci_list_item{device="01:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller (rev 15)"} 0
+# HELP pci_list_len Length of PCI List of this PC
+# TYPE pci_list_len gauge
+pci_list_len 2
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 0.98
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1.048576e+06
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 16
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 1.880064e+07
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.6740245972e+09
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 1.118384128e+09
+# HELP process_virtual_memory_max_bytes Maximum amount of virtual memory available in bytes.
+# TYPE process_virtual_memory_max_bytes gauge
+process_virtual_memory_max_bytes 1.8446744073709552e+19
+# HELP promhttp_metric_handler_requests_in_flight Current number of scrapes being served.
+# TYPE promhttp_metric_handler_requests_in_flight gauge
+promhttp_metric_handler_requests_in_flight 1
+# HELP promhttp_metric_handler_requests_total Total number of scrapes by HTTP status code.
+# TYPE promhttp_metric_handler_requests_total counter
+promhttp_metric_handler_requests_total{code="200"} 38
+promhttp_metric_handler_requests_total{code="500"} 0
+promhttp_metric_handler_requests_total{code="503"} 0
+# HELP receive receive
+# TYPE receive gauge
+receive{net_dev="docker0"} 0
+receive{net_dev="dummy0"} 0
+receive{net_dev="eth0"} 0
+receive{net_dev="l4tbr0"} 0
+receive{net_dev="rndis0"} 0
+receive{net_dev="usb0"} 0
+receive{net_dev="wlan0"} 1.73065072e+08
+# HELP transmit transmit
+# TYPE transmit gauge
+transmit{net_dev="docker0"} 0
+transmit{net_dev="dummy0"} 0
+transmit{net_dev="eth0"} 0
+transmit{net_dev="l4tbr0"} 0
+transmit{net_dev="rndis0"} 0
+transmit{net_dev="usb0"} 0
+transmit{net_dev="wlan0"} 6.5287749e+07
