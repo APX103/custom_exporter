@@ -118,7 +118,7 @@ func init() {
 func (g *GPUMitrics) Update() error {
 	gi, err := GetGpuInfo()
 	if err != nil {
-		fmt.Println("Get PCI Mitrics Error")
+		fmt.Println("Get GPU Mitrics Error")
 		return err
 	}
 	g.updateGPUMitrics(gi)
