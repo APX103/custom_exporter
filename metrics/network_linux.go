@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os/exec"
+	"strconv"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
@@ -17,22 +18,18 @@ type network struct {
 }
 
 var (
-	net_dev = promauto.NewGaugeVec(prometheus.GaugeOpts{
+	net_dev = promauto.NewCounterVec(prometheus.CounterOpts{
 		Name: "net_dev",
-		Help: "net_dev",
-	}, []string{"net_dev"})
-	ipv4_addr = promauto.NewGaugeVec(prometheus.GaugeOpts{
-		Name: "ipv4_addr",
-		Help: "ipv4_addr",
-	}, []string{"ipv4_addr"})
+		Help: "net_dev, and it's ipv4 addr",
+	}, []string{"net_dev", "ipv4_addr"})
 	receive = promauto.NewGaugeVec(prometheus.GaugeOpts{
 		Name: "receive",
 		Help: "receive",
-	}, []string{"receive"})
+	}, []string{"net_dev"})
 	transmit = promauto.NewGaugeVec(prometheus.GaugeOpts{
 		Name: "transmit",
 		Help: "transmit",
-	}, []string{"transmit"})
+	}, []string{"net_dev"})
 )
 
 type NetWorkMetrics struct {
@@ -61,7 +58,7 @@ func getIPv4Addr(device string) (string, error) {
 	output, _, err := outputBuf.ReadLine()
 	cmd.Wait()
 	if err != nil {
-		fmt.Println("Get ipv4 addr failed!")
+		// fmt.Println("Get ipv4 addr failed!")
 		return "", err
 	}
 	return string(output), nil
@@ -158,9 +155,7 @@ func (n *NetWorkMetrics) updateNetWorkMetrics(new []network) {
 		n.networks = make([]network, len(new))
 	}
 
-	for i, net := range new {
-		n.networks[i] = net
-	}
+	copy(n.networks, new)
 }
 
 func (n *NetWorkMetrics) Update() error {
@@ -171,10 +166,19 @@ func (n *NetWorkMetrics) Update() error {
 	}
 	n.updateNetWorkMetrics(networks)
 	for _, s := range n.networks {
-		net_dev.WithLabelValues(s.device).Inc()
-		ipv4_addr.WithLabelValues(s.device).Set(s.ipv4_addr)
-		receive.WithLabelValues(s.device).Set(s.receive)
-		transmit.WithLabelValues(s.device).Set(s.transmit)
+		_receive, err := strconv.ParseFloat(s.receive, 64)
+		if err != nil {
+			fmt.Println("parse receive error")
+			return err
+		}
+		_transmit, err := strconv.ParseFloat(s.transmit, 64)
+		if err != nil {
+			fmt.Println("parse transmit error")
+			return err
+		}
+		net_dev.WithLabelValues(s.device, s.ipv4_addr).Add(0)
+		receive.WithLabelValues(s.device).Set(_receive)
+		transmit.WithLabelValues(s.device).Set(_transmit)
 	}
 	return nil
 
