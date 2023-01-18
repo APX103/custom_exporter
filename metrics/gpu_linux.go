@@ -5,12 +5,13 @@ package metrics
 
 import (
 	"bufio"
-	"fmt"
 	"os/exec"
 	"regexp"
 	"strconv"
 	"strings"
 	"sync"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
@@ -54,12 +55,12 @@ func GetGpuInfo() ([]GpuInfo, error) {
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Printf("Error:can not obtain stdout pipe for command:%s\nmaybe because there is no nvidia-smi", err)
+		log.Debugf("Error:can not obtain stdout pipe for command:%s\nmaybe because there is no nvidia-smi", err)
 		return nil, err
 	}
 
 	if err := cmd.Start(); err != nil {
-		fmt.Println("Error:The command is err,", err)
+		log.Debugf("Error:The command is err,", err)
 		return nil, err
 	}
 
@@ -118,7 +119,7 @@ func init() {
 func (g *GPUMitrics) Update() error {
 	gi, err := GetGpuInfo()
 	if err != nil {
-		fmt.Println("Get GPU Mitrics Error")
+		log.Debugf("Get GPU Mitrics Error")
 		return err
 	}
 	g.updateGPUMitrics(gi)

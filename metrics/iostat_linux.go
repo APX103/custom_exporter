@@ -23,6 +23,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
+	log "github.com/sirupsen/logrus"
 )
 
 type deviceStats struct {
@@ -78,12 +79,12 @@ func getIOStats() ([]deviceStats, error) {
 	cmd := exec.Command("sh", "-c", "iostat -d")
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Printf("[Get iostat info error]: %v \n", err)
+		log.Debugf("[Get iostat info error]: %v \n", err)
 		return nil, err
 	}
 
 	if err := cmd.Start(); err != nil {
-		fmt.Printf("Error:The command is err: %v \n", err)
+		log.Debugf("Error:The command is err: %v \n", err)
 		return nil, err
 	}
 
@@ -115,7 +116,7 @@ func init() {
 func (iods *IODeviceMetrics) Update() error {
 	iostats, err := getIOStats()
 	if err != nil {
-		fmt.Println("Get err in getIOStats")
+		log.Debugf("Get err in getIOStats")
 		return err
 	}
 	iods.updateIODeviceMetric(iostats)

@@ -9,12 +9,12 @@ package metrics
 
 import (
 	"bufio"
-	"fmt"
 	"os/exec"
 	"sync"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
+	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -33,12 +33,12 @@ func getPCIListMetric() ([]string, error) {
 	cmd := exec.Command("lspci")
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Printf("Error:can not obtain stdout pipe for command:%s\nmaybe because there is no lspci", err)
+		log.Debugf("Error:can not obtain stdout pipe for command:%s\nmaybe because there is no lspci", err)
 		return nil, err
 	}
 
 	if err := cmd.Start(); err != nil {
-		fmt.Println("Error:The command is err,", err)
+		log.Debugln("Error:The command is err,", err)
 		return nil, err
 	}
 
@@ -82,7 +82,7 @@ func init() {
 func (p *PCIMitrics) Update() error {
 	lp, err := getPCIListMetric()
 	if err != nil {
-		fmt.Println("Get PCI Mitrics Error")
+		log.Debugf("Get PCI Mitrics Error")
 		return err
 	}
 	p.updatePCIMitrics(lp)

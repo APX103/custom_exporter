@@ -8,6 +8,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
+	log "github.com/sirupsen/logrus"
 )
 
 type network struct {
@@ -45,12 +46,12 @@ func getIPv4Addr(device string) (string, error) {
 	cmd := exec.Command("sh", "-c", _cmd)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Printf("[Get ipv4 addr error]: %v \n", err)
+		log.Debug(fmt.Sprintf("[Get ipv4 addr error]: %v \n", err))
 		return "", err
 	}
 
 	if err := cmd.Start(); err != nil {
-		fmt.Printf("Error:The command is err: %v \n", err)
+		log.Debug(fmt.Sprintf("Error:The command is err: %v \n", err))
 		return "", err
 	}
 
@@ -58,7 +59,7 @@ func getIPv4Addr(device string) (string, error) {
 	output, _, err := outputBuf.ReadLine()
 	cmd.Wait()
 	if err != nil {
-		// fmt.Println("Get ipv4 addr failed!")
+		// log.Debug("Get ipv4 addr failed!")
 		return "", err
 	}
 	return string(output), nil
@@ -69,12 +70,12 @@ func getReceive(device string) (string, error) {
 	cmd := exec.Command("sh", "-c", _cmd)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Printf("[Get receive error]: %v \n", err)
+		log.Debug(fmt.Sprintf("[Get receive error]: %v \n", err))
 		return "", err
 	}
 
 	if err := cmd.Start(); err != nil {
-		fmt.Printf("Error:The command is err: %v \n", err)
+		log.Debug(fmt.Sprintf("Error:The command is err: %v \n", err))
 		return "", err
 	}
 
@@ -82,7 +83,7 @@ func getReceive(device string) (string, error) {
 	output, _, err := outputBuf.ReadLine()
 	cmd.Wait()
 	if err != nil {
-		fmt.Println("Get receive failed!")
+		log.Debug("Get receive failed!")
 		return "", err
 	}
 	return string(output), nil
@@ -93,12 +94,12 @@ func getTransmit(device string) (string, error) {
 	cmd := exec.Command("sh", "-c", _cmd)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Printf("[Get transmit error]: %v \n", err)
+		log.Debugf("[Get transmit error]: %v \n", err)
 		return "", err
 	}
 
 	if err := cmd.Start(); err != nil {
-		fmt.Printf("Error:The command is err: %v \n", err)
+		log.Debugf("Error:The command is err: %v \n", err)
 		return "", err
 	}
 
@@ -106,7 +107,7 @@ func getTransmit(device string) (string, error) {
 	output, _, err := outputBuf.ReadLine()
 	cmd.Wait()
 	if err != nil {
-		fmt.Println("Get transmit failed!")
+		log.Debugf("Get transmit failed!")
 		return "", err
 	}
 	return string(output), nil
@@ -116,12 +117,12 @@ func getNetWork() ([]network, error) {
 	cmd := exec.Command("sh", "-c", "for i in $(cat /proc/net/dev | grep 0 | grep -v lo | awk '{print $1}'); do echo ${i%?};done")
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Printf("[Get network error]: %v \n", err)
+		log.Debugf("[Get network error]: %v \n", err)
 		return nil, err
 	}
 
 	if err := cmd.Start(); err != nil {
-		fmt.Printf("Error:The command is err: %v \n", err)
+		log.Debugf("Error:The command is err: %v \n", err)
 		return nil, err
 	}
 
@@ -161,19 +162,19 @@ func (n *NetWorkMetrics) updateNetWorkMetrics(new []network) {
 func (n *NetWorkMetrics) Update() error {
 	networks, err := getNetWork()
 	if err != nil {
-		fmt.Println("Get err in getNetWork")
+		log.Debugf("Get err in getNetWork")
 		return err
 	}
 	n.updateNetWorkMetrics(networks)
 	for _, s := range n.networks {
 		_receive, err := strconv.ParseFloat(s.receive, 64)
 		if err != nil {
-			fmt.Println("parse receive error")
+			log.Debugf("parse receive error")
 			return err
 		}
 		_transmit, err := strconv.ParseFloat(s.transmit, 64)
 		if err != nil {
-			fmt.Println("parse transmit error")
+			log.Debugf("parse transmit error")
 			return err
 		}
 		net_dev.WithLabelValues(s.device, s.ipv4_addr).Add(0)

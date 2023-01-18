@@ -2,7 +2,6 @@ package metrics
 
 import (
 	"bufio"
-	"fmt"
 	"os/exec"
 	"strconv"
 	"time"
@@ -10,6 +9,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/shirou/gopsutil/v3/cpu"
+	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -41,12 +41,12 @@ func getCPUCoreNumMetric() (float64, error) {
 	cmd := exec.Command("sh", "-c", "cat /proc/cpuinfo|grep processor|wc -l")
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Printf("[Get cpu info error]: %v \n", err)
+		log.Debugf("[Get cpu info error]: %v \n", err)
 		return 0, err
 	}
 
 	if err := cmd.Start(); err != nil {
-		fmt.Printf("Error:The command is err: %v \n", err)
+		log.Debugf("Error:The command is err: %v \n", err)
 		return 0, err
 	}
 
@@ -54,12 +54,12 @@ func getCPUCoreNumMetric() (float64, error) {
 	output, _, err := outputBuf.ReadLine()
 	cmd.Wait()
 	if err != nil {
-		fmt.Println("Read CPU Core failed!")
+		log.Debugf("Read CPU Core failed!")
 		return 0, err
 	}
 	cn, err := strconv.Atoi(string(output))
 	if err != nil {
-		fmt.Println("Atoi error in getCPUCoreNumMetric")
+		log.Debugf("Atoi error in getCPUCoreNumMetric")
 		return 0, err
 	}
 

@@ -2,13 +2,13 @@ package metrics
 
 import (
 	"bufio"
-	"fmt"
 	"os/exec"
 	"strconv"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/shirou/gopsutil/v3/mem"
+	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -42,12 +42,12 @@ func getMemTotalMetric() (float64, error) {
 	cmd := exec.Command("sh", "-c", "cat /proc/meminfo | grep MemTotal | grep -Eo '[0-9]+'")
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Printf("[Get mem total info error]: %v \n", err)
+		log.Debugf("[Get mem total info error]: %v \n", err)
 		return 0, err
 	}
 
 	if err := cmd.Start(); err != nil {
-		fmt.Printf("Error:The command is err: %v \n", err)
+		log.Debugf("Error:The command is err: %v \n", err)
 		return 0, err
 	}
 
@@ -55,12 +55,12 @@ func getMemTotalMetric() (float64, error) {
 	output, _, err := outputBuf.ReadLine()
 	cmd.Wait()
 	if err != nil {
-		fmt.Println("Read Mem Total failed!")
+		log.Debugf("Read Mem Total failed!")
 		return 0, err
 	}
 	cn, err := strconv.Atoi(string(output))
 	if err != nil {
-		fmt.Println("Atoi error in getMemTotalMetric")
+		log.Debugf("Atoi error in getMemTotalMetric")
 		return 0, err
 	}
 	return float64(cn), nil
