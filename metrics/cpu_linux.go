@@ -13,10 +13,10 @@ import (
 )
 
 var (
-	cpuUtilization = promauto.NewGauge(prometheus.GaugeOpts{
+	cpuUtilization = promauto.NewGaugeVec(prometheus.GaugeOpts{
 		Name: "cpu_utilization",
 		Help: "CPU utilization of this PC",
-	})
+	}, []string{"cpu_id"})
 	cpuCoreNum = promauto.NewGauge(prometheus.GaugeOpts{
 		Name: "cpu_core_number",
 		Help: "CPU Core Number of this PC",
@@ -29,12 +29,12 @@ func init() {
 	registerCollector("cpu_metrics", defaultEnabled, &CPUMetrics{})
 }
 
-func getCPUUtilizationMetric() (float64, error) {
-	percent, err := cpu.Percent(time.Second, false)
+func getCPUUtilizationMetric() ([]float64, error) {
+	percent, err := cpu.Percent(time.Second, true)
 	if err != nil {
-		return 0, err
+		return nil, err
 	}
-	return float64(percent[0]), nil
+	return percent, nil
 }
 
 func getCPUCoreNumMetric() (float64, error) {
@@ -69,11 +69,16 @@ func getCPUCoreNumMetric() (float64, error) {
 
 func (m *CPUMetrics) Update() error {
 	cu, err := getCPUUtilizationMetric()
+	if err != nil {
+		return err
+	}
 	cn, err := getCPUCoreNumMetric()
 	if err != nil {
 		return err
 	}
-	cpuUtilization.Set(cu)
+	for i, v := range cu {
+		cpuUtilization.WithLabelValues(strconv.Itoa(i)).Set(v)
+	}
 	cpuCoreNum.Set(cn)
 	return nil
 }
