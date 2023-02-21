@@ -127,7 +127,6 @@ func getNetWork() ([]network, error) {
 	}
 
 	outputBuf := bufio.NewReader(stdout)
-	cmd.Wait()
 	var network_list []network
 
 	for {
@@ -148,6 +147,7 @@ func getNetWork() ([]network, error) {
 		}
 		network_list = append(network_list, *n)
 	}
+	cmd.Wait()
 	return network_list, nil
 }
 
