@@ -24,10 +24,7 @@ jobs:
         go-version: 1.19
 
     - name: Build GPU
-      run: |
-        ls
-        pwd
-        go build --tags="nojetson" -o ./.../custom_exporter_ubunut1804_gpu -v ./.../main.go
+      run: go build --tags="nojetson" -o ./custom_exporter_ubunut1804_gpu -v ./main.go
 
     - name: Create Release
       id: create_release
@@ -47,6 +44,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./.../custom_exporter_ubunut1804_gpu
+        asset_path: ./custom_exporter_ubunut1804_gpu
         asset_name: custom_exporter_ubunut1804_gpu
         asset_content_type: application/octet-stream
