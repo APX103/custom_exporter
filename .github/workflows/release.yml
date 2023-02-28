@@ -11,6 +11,9 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  create:
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -26,6 +29,12 @@ jobs:
     - name: Build GPU
       run: go build --tags="nojetson" -o ./custom_exporter_ubunut1804_gpu -v ./main.go
 
+    - name: Build CPU
+      run: go build -v --tags="nojetson nogpu" -o custom_exporter_ubuntu1804_cpu ./main.go
+
+    - name: Build Jetson
+      run: GOARCH=arm64 CGO_ENABLED=0 go build --tags="nogpu" -o custom_exporter_ubuntu1804_jetson -v ./main.go
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -37,7 +46,7 @@ jobs:
         body: Release ${{ github.ref }}, have fun.
         draft: false
         prerelease: false
-        
+
     - name: Upload Release Asset GPU
       uses: actions/upload-release-asset@v1
       env:
@@ -46,4 +55,24 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./custom_exporter_ubunut1804_gpu
         asset_name: custom_exporter_ubunut1804_gpu
+        asset_content_type: application/octet-stream
+
+    - name: Upload Release Asset GPU
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./custom_exporter_ubunut1804_cpu
+        asset_name: custom_exporter_ubunut1804_cpu
+        asset_content_type: application/octet-stream
+
+    - name: Upload Release Asset GPU
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./custom_exporter_ubunut1804_jetson
+        asset_name: custom_exporter_ubunut1804_jetson
         asset_content_type: application/octet-stream
